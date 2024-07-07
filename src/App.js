@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Navbar } from "./Components/Navbar";
+import { Main } from "./Components/Main";
+import { Categories } from "./Components/Categories";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [activeTab, setActiveTab] = useState("Home");
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "Home":
+        return (
+          <div>
+            <Main />
+          </div>
+        );
+      case "Categories":
+        return (
+          <div>
+            <Categories/>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+      {renderContent()}
     </div>
   );
-}
+};
 
 export default App;
